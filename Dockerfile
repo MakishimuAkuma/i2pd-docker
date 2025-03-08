@@ -21,7 +21,7 @@ RUN mkdir -p /tmp/build \
 	&& make -j$(nproc)
 
 
-FROM --platform=$BUILDPLATFORM alpine:latest
+FROM alpine:latest
 
 WORKDIR /opt/i2pd
 
