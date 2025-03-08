@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM alpine:latest AS builder
+FROM alpine:latest AS builder
 
 ARG GIT_BRANCH="openssl"
 ENV GIT_BRANCH=${GIT_BRANCH}
