@@ -1,22 +1,13 @@
 FROM alpine:latest AS builder
 
-ARG GIT_BRANCH="openssl"
-ENV GIT_BRANCH=${GIT_BRANCH}
-ARG GIT_TAG=""
-ENV GIT_TAG=${GIT_TAG}
-ARG REPO_URL="https://github.com/PurpleI2P/i2pd.git"
-ENV REPO_URL=${REPO_URL}
-
 RUN apk update && apk --no-cache --virtual build-dependendencies add \
 		make gcc g++ libtool zlib-dev boost-dev build-base \
 		openssl-dev openssl miniupnpc-dev cmake git
 
 RUN mkdir -p /tmp/build \
 	&& cd /tmp/build \
-	&& git clone -b ${GIT_BRANCH} ${REPO_URL} \
-	&& cd i2pd \
-	&& if [ -n "${GIT_TAG}" ]; then git checkout tags/${GIT_TAG}; fi \
-	&& cd build \
+	&& git clone --depth 1 --branch 2.56.0 https://github.com/PurpleI2P/i2pd.git \
+	&& cd i2pd/build \
 	&& cmake -D CMAKE_BUILD_TYPE=Release -D WITH_UPNP=ON -D WITH_AVX=ON \
 	&& make -j$(nproc)
 
