@@ -1,4 +1,4 @@
-# i2pd-docker 2.55.0
+# i2pd-docker 2.56.0
 
 ```
 docker buildx create --use
