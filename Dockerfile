@@ -6,7 +6,7 @@ RUN apk update && apk --no-cache --virtual build-dependendencies add \
 
 RUN mkdir -p /tmp/build \
 	&& cd /tmp/build \
-	&& git clone --depth 1 --branch 2.56.0 https://github.com/PurpleI2P/i2pd.git \
+	&& git clone --depth 1 https://github.com/PurpleI2P/i2pd.git \
 	&& cd i2pd/build \
 	&& cmake -D CMAKE_BUILD_TYPE=Release -D WITH_UPNP=ON -D WITH_AVX=ON \
 	&& make -j$(nproc)
@@ -16,7 +16,7 @@ FROM alpine:latest
 
 WORKDIR /opt/i2pd
 
-RUN apk update && apk --no-cache --virtual add boost-filesystem boost-system \
+RUN apk --update --no-cache --virtual add boost-filesystem boost-system \
 	boost-program_options boost-date_time boost-thread \
 	boost-iostreams openssl miniupnpc musl-utils libstdc++
 
