@@ -12,4 +12,4 @@ jobs:
         run: |
             git clone https://github.com/PurpleI2P/i2pd.git
             echo "version=$(git -C ./i2pd describe --tags --abbrev=0)" >> $GITHUB_ENV
-            ls github
+            ls github.
