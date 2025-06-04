@@ -10,6 +10,7 @@ jobs:
       -
         name: Clone i2pd
         run: |
+            git clone https://github.com/MakishimuAkuma/i2pd-docker.git .
             git clone https://github.com/PurpleI2P/i2pd.git
             echo "version=$(git -C ./i2pd describe --tags --abbrev=0)" >> $GITHUB_ENV
       -
