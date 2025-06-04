@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Clone i2pd
+        run: |
+            git clone https://github.com/PurpleI2P/i2pd.git
+            echo "version=$(git -C ./i2pd describe --tags --abbrev=0)" >> $GITHUB_ENV
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       -
@@ -20,15 +25,11 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_SECRET }}
       -
-        name: Clone i2pd
-        run: |
-            git clone https://github.com/PurpleI2P/i2pd.git
-            echo "version=$(git -C ./i2pd describe --tags --abbrev=0)" >> $GITHUB_ENV
-      -
         name: Build and push
         uses: docker/build-push-action@v6
         with:
           tags: ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE }}:${{ env.version }}, ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE }}:latest
           platforms: linux/amd64,linux/386,linux/s390x,linux/arm64/v8,linux/arm/v7,linux/arm/v6,linux/ppc64le,linux/riscv64
+          file: ./Dockerfile
           context: .
           push: true
