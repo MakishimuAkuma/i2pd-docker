@@ -30,6 +30,6 @@ jobs:
         with:
           tags: ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE }}:${{ env.version }}, ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE }}:latest
           platforms: linux/amd64,linux/386,linux/s390x,linux/arm64/v8,linux/arm/v7,linux/arm/v6,linux/ppc64le,linux/riscv64
-          file: ${{ github./Dockerfile }}
+          file: ${{ github.Dockerfile }}
           context: .
           push: true
