@@ -20,6 +20,12 @@ RUN apk --update --no-cache --virtual add boost-filesystem boost-system \
 
 RUN mkdir -p /opt/i2pd/data /opt/i2pd/conf /var/lib/i2pd
 
+COPY --from=builder /tmp/build/i2pd/build/i2pd /opt/i2pd/i2pd
+COPY --from=builder /tmp/build/i2pd/contrib/i2pd.conf /var/lib/i2pd/i2pd.conf
+COPY --from=builder /tmp/build/i2pd/contrib/tunnels.conf /var/lib/i2pd/tunnels.conf
+COPY --from=builder /tmp/build/i2pd/contrib/subscriptions.txt /var/lib/i2pd/subscriptions.txt
+COPY --from=builder /tmp/build/i2pd/contrib/certificates /var/lib/i2pd/certificates
+
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
