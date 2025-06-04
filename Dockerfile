@@ -4,7 +4,7 @@ RUN apk --update --no-cache --virtual build-dependendencies add \
 		make gcc g++ libtool zlib-dev boost-dev build-base \
 		openssl-dev openssl miniupnpc-dev cmake git
 
-COPY ./i2pd ./i2pd
+COPY ../i2pd ./i2pd
 
 RUN cd i2pd/build \
 	&& cmake -D CMAKE_BUILD_TYPE=Release -D WITH_UPNP=ON -D WITH_AVX=ON \
