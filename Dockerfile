@@ -1,5 +1,7 @@
 FROM alpine:latest AS builder
 
+WORKDIR /tmp/build
+
 RUN apk --update --no-cache --virtual build-dependendencies add \
 		make gcc g++ libtool zlib-dev boost-dev build-base \
 		openssl-dev openssl miniupnpc-dev cmake git
