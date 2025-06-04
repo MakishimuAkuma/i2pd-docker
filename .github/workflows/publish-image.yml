@@ -28,6 +28,9 @@ jobs:
           password: ${{ secrets.DOCKER_SECRET }}
       -
         name: Build and push
+        run: |
+          git clone https://github.com/PurpleI2P/i2pd.git
+          echo "version=$(git -C ./i2pd describe --tags --abbrev=0)" >> $GITHUB_ENV
         uses: docker/build-push-action@v6
         with:
           tags: ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE }}:${{ env.version }}, ${{ secrets.DOCKER_USER }}/${{ secrets.DOCKER_IMAGE }}:latest
